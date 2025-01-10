@@ -18,6 +18,7 @@ y = data["overpotential"].to_numpy()
 
 # Split into training and validation datasets
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+print(y_train.shape)
 
 # Convert datasets into LightGBM format
 train_data = lgb.Dataset(X_train, label=y_train)

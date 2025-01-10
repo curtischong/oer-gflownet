@@ -17,15 +17,16 @@
 
 # I don't htink that gflownets can handle continuous actions?
 
+from typing import List, Tuple
 from gflownet.envs.base import GFlowNetEnv
 import numpy as np
 
-NUM_ELEMENTS = 5
+NUM_ELEMENTS = 6
 
 
 class OEREnv(GFlowNetEnv):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.state = np.zeros(NUM_ELEMENTS)
         self.source = np.zeros(NUM_ELEMENTS)
 
@@ -37,3 +38,45 @@ class OEREnv(GFlowNetEnv):
 
     def reset(self):
         self.state = np.zeros(NUM_ELEMENTS)
+
+    def done(self):
+        pass
+
+    def step(
+        self, action: Tuple[int], skip_mask_check: bool = False
+    ) -> Tuple[List[int], Tuple[int], bool]:
+        """
+        Executes step given an action.
+
+        Args
+        ----
+        action : tuple
+            Action to be executed. An action is a tuple int values indicating the
+            dimensions to increment by 1.
+
+        skip_mask_check : bool
+            If True, skip computing forward mask of invalid actions to check if the
+            action is valid.
+
+        Returns
+        -------
+        self.state : list
+            The sequence after executing the action
+
+        action : tuple
+            Action executed
+
+        valid : bool
+            False, if the action is not allowed for the current state.
+        """
+
+        # If action is eos
+        if action == self.eos:
+            self.done = True
+            self.n_actions += 1
+            return self.state, self.eos, True
+        # If action is not eos, then perform action
+        else:
+            self.state = action
+            valid = True
+            return self.state, action, valid
