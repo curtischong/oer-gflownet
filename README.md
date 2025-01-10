@@ -2,6 +2,7 @@
 
 How to install:
 
+```bash
 python3.10 -m venv venv
 source ./venv/bin/activate
 
@@ -9,6 +10,11 @@ source ./venv/bin/activate
 ./prereq_python.sh  # Installs python packages with specific wheels.
 ./prereq_geometric.sh  # OPTIONAL - for the molecule environment.
 pip install .[all]  # Install the remaining elements of this package.
+
+# curtis' dependencies
+pip install polars
+pip install lightgbm
+```
 
 # gflownet
 
