@@ -1,3 +1,15 @@
+# oer-gflownet
+
+How to install:
+
+python3.10 -m venv venv
+source ./venv/bin/activate
+
+./prereq_ubuntu.sh  # Installs some packages required by dependencies.
+./prereq_python.sh  # Installs python packages with specific wheels.
+./prereq_geometric.sh  # OPTIONAL - for the molecule environment.
+pip install .[all]  # Install the remaining elements of this package.
+
 # gflownet
 
 gflownet is a library built upon [PyTorch](https://pytorch.org/) to easily train and extend [GFlowNets](https://arxiv.org/abs/2106.04399), also known as GFN or generative flow networks. GFlowNets are a machine learning framework for probabilistic and generative modelling, with a wide range of applications, especially in [scientific discovery](https://pubs.rsc.org/en/content/articlelanding/2023/dd/d3dd00002h) problems.
@@ -279,4 +291,3 @@ Bibtex Format
 ```
 
 Or [CFF file](./CITATION.cff)
-# oer-gflownet
