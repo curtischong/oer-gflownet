@@ -23,4 +23,4 @@ class SimulatedLab(Proxy):
 
         res = self.model.predict(torch.nn.functional.softmax(x, dim=-1))
         print("res", res)
-        return -res # make rewards negative. so a lower overenergy is better
+        return -torch.tensor(res, dtype=torch.float) # make rewards negative. so a lower overenergy is better
