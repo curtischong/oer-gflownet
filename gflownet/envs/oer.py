@@ -26,9 +26,10 @@ NUM_ELEMENTS = 6
 
 class OEREnv(GFlowNetEnv):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
         self.state = np.zeros(NUM_ELEMENTS)
         self.source = np.zeros(NUM_ELEMENTS)
+        # print("src", self.source)
+        super().__init__(**kwargs)
 
     # for continuous actions: https://github.com/alexhernandezgarcia/gflownet/blob/main/gflownet/envs/cube.py#L337
     def get_action_space(self):
@@ -36,8 +37,9 @@ class OEREnv(GFlowNetEnv):
         self.representative_action = tuple([0.0] * NUM_ELEMENTS)
         return [self.representative_action, self.eos]
 
-    def reset(self):
-        self.state = np.zeros(NUM_ELEMENTS)
+    # def reset(self):
+    #     self.state = np.zeros(NUM_ELEMENTS)
+    #     self.source = np.zeros(NUM_ELEMENTS)
 
     def done(self):
         pass
@@ -70,6 +72,7 @@ class OEREnv(GFlowNetEnv):
             False, if the action is not allowed for the current state.
         """
 
+        print("action", action)
         # If action is eos
         if action == self.eos:
             self.done = True
