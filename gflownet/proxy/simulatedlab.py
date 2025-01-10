@@ -15,6 +15,11 @@ class SimulatedLab(Proxy):
     #     return self.model(x)
     
     def __call__(self, x):
-        res = self.model.predict(x)
+        x = torch.tensor(x)
+        print("x", x)
+
+        # why is their documentation lying? -0.9980 is not within [0, 1]
+
+        res = self.model.predict(torch.nn.functional.softmax(x, dim=-1))
         print("res", res)
         return res
