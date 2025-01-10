@@ -9,6 +9,7 @@ class SimulatedLab(Proxy):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.model = lgb.Booster(model_file="lightgbm_model.txt")
+        self._optimum = 0
 
 
     # def get_next(self, x: torch.Tensor):
@@ -22,4 +23,4 @@ class SimulatedLab(Proxy):
 
         res = self.model.predict(torch.nn.functional.softmax(x, dim=-1))
         print("res", res)
-        return res
+        return -res # make rewards negative. so a lower overenergy is better
