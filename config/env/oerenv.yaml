@@ -1,7 +1,7 @@
 defaults:
   - base
 
-_target_: gflownet.envs.oer.OEREnv
+_target_: gflownet.envs.oerenv.OEREnv
 
 id: oer
 

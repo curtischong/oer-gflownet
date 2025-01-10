@@ -15,4 +15,6 @@ class SimulatedLab(Proxy):
     #     return self.model(x)
     
     def __call__(self, x):
-        return self.model.predict(x)
+        res = self.model.predict(x)
+        print("res", res)
+        return res
